@@ -42,7 +42,6 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-      {console.log(posts)}
       <PromptCardList data={posts} handleTagClick={() => {}} />
     </section>
   );

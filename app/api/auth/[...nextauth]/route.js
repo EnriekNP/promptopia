@@ -29,7 +29,6 @@ const handler = NextAuth({
         });
 
         if (!userExists) {
-          console.log(profile);
           await User.create({
             email: profile.email,
             username: sanitizeUsername(profile.name),
