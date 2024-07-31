@@ -23,7 +23,7 @@ const Feed = () => {
   const [allPosts, setAllPosts] = useState([]);
   const filterPrompts = (searchtext) => {
     const regex = new RegExp(searchtext, 'i');
-    return posts.filter(
+    return allPosts.filter(
       (item) =>
         regex.test(item.username) ||
         regex.test(item.tag) ||
@@ -52,6 +52,12 @@ const Feed = () => {
 
     fetchPosts();
   }, []);
+  const handleTagClick = (tagName) => {
+    setSearchText(tagName);
+
+    const searchResult = filterPrompts(tagName);
+    setSearchedResults(searchResult);
+  };
   return (
     <section className="feed">
       <form className="relative w-full flex-center">
@@ -65,9 +71,12 @@ const Feed = () => {
         />
       </form>
       {searchText ? (
-        <PromptCardList data={searchedResults} handleTagClick={() => {}} />
+        <PromptCardList
+          data={searchedResults}
+          handleTagClick={handleTagClick}
+        />
       ) : (
-        <PromptCardList data={allPosts} handleTagClick={() => {}} />
+        <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
       )}
     </section>
   );
